@@ -1,14 +1,10 @@
 import streamlit as st
-# import google.generativeai as genai
+import google.generativeai as genai
 import os
 import textwrap
 import subprocess
 import sys
 
-def install(package):
-    subprocess.check_call([sys.executable, "-m", "pip", "install", package])
-
-install('google-generativeai')
 
 def to_markdown(text):
   text = text.replace('•', '  *')
