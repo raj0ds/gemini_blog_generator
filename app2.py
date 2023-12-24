@@ -2,20 +2,13 @@ import streamlit as st
 # import google.generativeai as genai
 import os
 import textwrap
-# from IPython.display import Markdown
-# from IPython.display import display
+import subprocess
+import sys
 
-def install_and_import(package):
-    import importlib
-    try:
-        importlib.import_module(package)
-    except ImportError:
-        import pip
-        pip.main(['install', package])
-    finally:
-        globals()[package] = importlib.import_module(package)
+def install(package):
+    subprocess.check_call([sys.executable, "-m", "pip", "install", package])
 
-install_and_import('google-generativeai')
+install('google-generativeai')
 
 def to_markdown(text):
   text = text.replace('•', '  *')
