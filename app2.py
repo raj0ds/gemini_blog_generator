@@ -11,7 +11,6 @@ def to_markdown(text):
   return Markdown(textwrap.indent(text, '> ', predicate=lambda _: True)).data
 
 def getllamaresponse(input_text, no_words, blog_style, gemini_api):
-    # gemini_api="AIzaSyDnWQcIzzI_VDEbFZ5-EbAOZ0URdJl66EE"
     os.environ["GOOGLE_API_KEY"] = gemini_api
     genai.configure(api_key=os.environ["GOOGLE_API_KEY"])
     model = genai.GenerativeModel('gemini-pro')
