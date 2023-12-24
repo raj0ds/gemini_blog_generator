@@ -1,10 +1,21 @@
 import streamlit as st
-import google.generativeai as genai
+# import google.generativeai as genai
 import os
 import textwrap
 from IPython.display import Markdown
 from IPython.display import display
 
+def install_and_import(package):
+    import importlib
+    try:
+        importlib.import_module(package)
+    except ImportError:
+        import pip
+        pip.main(['install', package])
+    finally:
+        globals()[package] = importlib.import_module(package)
+
+install_and_import('google-generativeai')
 
 def to_markdown(text):
   text = text.replace('•', '  *')
@@ -12,8 +23,8 @@ def to_markdown(text):
 
 def getllamaresponse(input_text, no_words, blog_style, gemini_api):
     os.environ["GOOGLE_API_KEY"] = gemini_api
-    genai.configure(api_key=os.environ["GOOGLE_API_KEY"])
-    model = genai.GenerativeModel('gemini-pro')
+    google.generativeai.configure(api_key=os.environ["GOOGLE_API_KEY"])
+    model = google.generativeai.GenerativeModel('gemini-pro')
     prompt=f'Write a blog for {blog_style} job profile for a topic {input_text} within {no_words}'
     response = model.generate_content(prompt)
     response_text= to_markdown(response.text)
