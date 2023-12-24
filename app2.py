@@ -12,8 +12,8 @@ def to_markdown(text):
 
 def getllamaresponse(input_text, no_words, blog_style, gemini_api):
     os.environ["GOOGLE_API_KEY"] = gemini_api
-    google.generativeai.configure(api_key=os.environ["GOOGLE_API_KEY"])
-    model = google.generativeai.GenerativeModel('gemini-pro')
+    genai.configure(api_key=os.environ["GOOGLE_API_KEY"])
+    model = genai.GenerativeModel('gemini-pro')
     prompt=f'Write a blog for {blog_style} job profile for a topic {input_text} within {no_words}'
     response = model.generate_content(prompt)
     # response_text= to_markdown(response.text)
